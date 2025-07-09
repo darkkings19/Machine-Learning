@@ -1,0 +1,217 @@
+<!-- Simulación Interactiva -->
+<section class="simulation-section">
+  <div class="container">
+    <h2 class="section-title">Simulación Interactiva de Q-Learning</h2>
+    <p class="section-description">
+      Experimenta con el algoritmo Q-Learning en tiempo real. Modifica el entorno y observa cómo el agente aprende a encontrar el camino óptimo.
+    </p>
+
+    
+    <div class="simulation-content">
+      <div class="controls-panel">
+        <h3>Configuración del Entrenamiento</h3>
+        
+        <!-- Botones de configuración del laberinto -->
+        <div class="button-group">
+          <button class="btn-outline" (click)="generateRandomMaze()" [disabled]="isTraining || isDemonstrating">
+            <i class="fas fa-random"></i>
+            Laberinto Aleatorio
+          </button>
+          <button class="btn-outline" (click)="clearMaze()" [disabled]="isTraining || isDemonstrating">
+            <i class="fas fa-eraser"></i>
+            Limpiar Laberinto
+          </button>
+        </div>
+        <!-- Configuración del laberinto -->
+        <div class="control-group">
+          <label for="maze-size">Tamaño del laberinto: {{rows}}x{{cols}}</label>
+          <select id="maze-size" [value]="rows" (change)="onMazeSizeChange($event)">
+            <option value="5">5x5</option>
+            <option value="6">6x6</option>
+            <option value="7">7x7</option>
+            <option value="8">8x8</option>
+            <option value="9">9x9</option>
+            <option value="10">10x10</option>
+            <option value="12">12x12</option>
+            <option value="15">15x15</option>
+          </select>
+        </div>
+
+        <!-- Parámetros de entrenamiento -->
+        <div class="control-group">
+          <label>Tasa de Aprendizaje: {{ learningRate }}</label>
+          <input 
+            type="range" 
+            min="0.01" 
+            max="1" 
+            step="0.01" 
+            [(ngModel)]="learningRate"
+            class="parameter-slider">
+        </div>
+        
+        <div class="control-group">
+          <label>Factor de Descuento: {{ discountFactor }}</label>
+          <input 
+            type="range" 
+            min="0.1" 
+            max="1" 
+            step="0.1" 
+            [(ngModel)]="discountFactor"
+            class="parameter-slider">
+        </div>
+        
+        <div class="control-group">
+          <label>Epsilon Inicial: {{ initialEpsilon }}</label>
+          <input 
+            type="range" 
+            min="0.01" 
+            max="1" 
+            step="0.01" 
+            [(ngModel)]="initialEpsilon"
+            class="parameter-slider">
+        </div>
+
+        <div class="control-group">
+          <label>
+            <input 
+              type="checkbox" 
+              [(ngModel)]="fastTraining">
+            Entrenamiento Ultrarrápido (sin visualización paso a paso)
+          </label>
+        </div>
+
+        <div class="control-group" 
+             *ngIf="!fastTraining"
+             [@slideInOut]>
+          <label>Velocidad de Entrenamiento: {{ trainingSpeed }}ms</label>
+          <input 
+            type="range" 
+            min="5" 
+            max="500" 
+            step="5" 
+            [(ngModel)]="trainingSpeed"
+            class="parameter-slider">
+        </div>
+
+        <!-- Botones de control -->
+        <div class="button-group">
+          <button class="btn-primary" (click)="startTraining()" [disabled]="isTraining || isDemonstrating">
+            <i class="fas fa-play"></i>
+            {{isTraining ? 'Entrenando...' : 'Iniciar Entrenamiento'}}
+          </button>
+          <button class="btn-secondary" (click)="stopTraining()" [disabled]="!isTraining">
+            <i class="fas fa-stop"></i>
+            Detener
+          </button>
+          <button class="btn-secondary" (click)="reset()">
+            <i class="fas fa-redo"></i>
+            Reiniciar
+          </button>
+          <button class="btn-success" (click)="demonstrateBestPath()" [disabled]="episode < 10 || isTraining || isDemonstrating">
+            <i class="fas fa-eye"></i>
+            {{isDemonstrating ? 'Demostrando...' : 'Demostrar'}}
+          </button>
+          <button class="btn-info" (click)="showQTable = !showQTable">
+            <i class="fas fa-table"></i>
+            {{showQTable ? 'Ocultar' : 'Mostrar'}} Valores Q
+          </button>
+        </div>
+      </div>
+
+      
+      <div class="maze-panel">
+        <h3>Laberinto</h3>
+        <p class="maze-description">
+          <span class="legend-item"><span class="legend-agent"></span> Agente</span>
+          <span class="legend-item"><span class="legend-goal"></span> Meta</span>
+          <span class="legend-item"><span class="legend-wall"></span> Muro</span>
+          <span class="legend-item"><span class="legend-path"></span> Camino</span>
+        </p>
+        <div class="canvas-container">
+          <canvas 
+            #maze
+            [width]="cols * cellSize"
+            [height]="rows * cellSize"
+            class="maze-canvas"
+            (mousedown)="onMouseDown($event)"
+            (mousemove)="onMouseMove($event)"
+            (mouseup)="onMouseUp()"
+            (mouseleave)="onMouseUp()">
+          </canvas>
+        </div>
+        
+        <div class="stats-panel">
+          <h4>Estadísticas</h4>
+          <div class="stat-item">
+            <span>Estado:</span>
+            <span>{{ isTraining ? 'Entrenando' : (isDemonstrating ? 'Demostrando' : 'Detenido') }}</span>
+          </div>
+          <div class="stat-item">
+            <span>Episodio:</span>
+            <span>{{ episode }}</span>
+          </div>
+          <div class="stat-item">
+            <span>Tasa de Aprendizaje:</span>
+            <span>{{ learningRate }}</span>
+          </div>
+          <div class="stat-item">
+            <span>Epsilon Actual:</span>
+            <span>{{ epsilon.toFixed(3) }}</span>
+          </div>
+          <div class="stat-item">
+            <span>Recompensa Total:</span>
+            <span>{{ totalReward }}</span>
+          </div>
+          <div class="stat-item" 
+               *ngIf="!fastTraining"
+               [@fadeInOut]="'in'">
+            <span>Velocidad Entrenamiento:</span>
+            <span>{{ trainingSpeed }}ms</span>
+          </div>
+          <div class="stat-item" 
+               *ngIf="fastTraining"
+               [@fadeInOut]="'in'">
+            <span>Modo:</span>
+            <span>Ultrarrápido</span>
+          </div>
+        </div>
+        
+        <div class="algorithm-info">
+          <h4>Algoritmo Q-Learning</h4>
+          <div class="formula">
+            <p><strong>Fórmula de Actualización:</strong></p>
+            <code>Q(s,a) = Q(s,a) + α [r + γ max Q(s',a') - Q(s,a)]</code>
+            <ul class="formula-explanation">
+              <li><strong>s:</strong> Estado actual</li>
+              <li><strong>a:</strong> Acción tomada</li>
+              <li><strong>r:</strong> Recompensa recibida</li>
+              <li><strong>s':</strong> Nuevo estado</li>
+              <li><strong>α:</strong> Tasa de aprendizaje</li>
+              <li><strong>γ:</strong> Factor de descuento</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tabla Q Visualización -->
+    <div class="q-table-section" *ngIf="showQTable">
+      <h3>Valores Q (Simplificados)</h3>
+      <div class="q-table-container">
+        <p class="q-table-description">Máximo valor Q por celda:</p>
+        <div class="q-table-grid">
+          <div 
+            *ngFor="let row of qTable; let i = index"
+            class="q-table-row">
+            <div 
+              *ngFor="let cell of row; let j = index"
+              class="q-table-cell"
+              [class]="getQValueColor(getMaxQValue(i, j))">
+              {{ getMaxQValue(i, j).toFixed(1) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
