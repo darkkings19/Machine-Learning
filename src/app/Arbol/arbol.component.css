@@ -40,10 +40,10 @@
   font-size: 3rem;
   font-weight: 700;
   text-align: center;
-  background: var(--gradient-primary);
+  background-color: var(--gradient-primary);
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
