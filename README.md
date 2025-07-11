@@ -1,14 +1,5 @@
 ##  Guía para clonar y ejecutar el proyecto (Windows / Linux / macOS)
 
-###  Requisitos previos
-
-Antes de comenzar, asegúrate de tener instalados:
-
-* [Git](https://git-scm.com/downloads)
-* **Node.js** (incluye `npm`) — se instala en el paso 1
-* **Angular CLI** (se instala globalmente en el paso 7)
-
----
 
 ###  1. Instalar Node.js
 
@@ -61,10 +52,8 @@ brew install git
 Abre una terminal o consola y ejecuta:
 
 ```bash
-git clone <URL-del-repositorio>
+git clone [<URL-del-repositorio>](https://github.com/camilo09m/Machine-Learning)
 ```
-
-Reemplaza `<URL-del-repositorio>` por la URL real del repositorio.
 
 ---
 
@@ -74,7 +63,6 @@ Reemplaza `<URL-del-repositorio>` por la URL real del repositorio.
 cd <nombre-de-la-carpeta>
 ```
 
-Reemplaza `<nombre-de-la-carpeta>` con el nombre del directorio del proyecto.
 
 ---
 
@@ -120,4 +108,4 @@ ng serve
 
 Una vez cargado, abre tu navegador y visita:
 
-📍 [http://localhost:4200](http://localhost:4200)
+ [http://localhost:4200](http://localhost:4200)
