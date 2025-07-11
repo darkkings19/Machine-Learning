@@ -1,4 +1,15 @@
 <div class="aprendizaje-container">
+    <!-- Header profesional -->
+  <div class="header-section">
+    <div class="container">
+      <h1 class="section-title">¿Qué es el Aprendizaje por Refuerzo?</h1>
+      <p class="section-description">
+        El <strong>Aprendizaje por Refuerzo </strong>  es una rama del machine learning en la que una máquina o agente aprende a tomar decisiones a través de la experiencia, interactuando con un entorno y recibiendo recompensas o castigos según las acciones que realiza. El objetivo del agente es aprender, mediante prueba y error, qué acciones le permiten maximizar la recompensa acumulada a largo plazo.
+        <br>
+        A diferencia de otros tipos de aprendizaje automático, como el supervisado (donde se usan datos etiquetados) o el no supervisado (que busca patrones en datos sin etiquetar), en el aprendizaje por refuerzo el agente no recibe indicaciones directas sobre cuál es la acción correcta. En su lugar, explora diferentes opciones y aprende de las consecuencias de sus decisiones, ajustando su comportamiento para obtener mejores resultados en el futuro
+      </p>
+    </div>
+  </div>
   <!-- Navbar de pestañas -->
   <section class="tabs-section">
     <div class="container">
@@ -14,7 +25,7 @@
           </div>
           <span>Teoría</span>
         </button>
-        
+
         <button
           (click)="setActiveTab('entorno')"
           [class]="activeTab === 'entorno' ? 'active' : ''"
@@ -26,7 +37,7 @@
           </div>
           <span>Entorno Interactivo</span>
         </button>
-        
+
         <button
           (click)="setActiveTab('codigo')"
           [class]="activeTab === 'codigo' ? 'active' : ''"

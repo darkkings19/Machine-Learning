@@ -1,12 +1,18 @@
 <div class="arbol-container">
+  <!-- Header profesional -->
+  <div class="header-section">
+    <div class="container">
+      <h1 class="section-title">¿Qué son los Árboles de Decisión?</h1>
+      <p class="section-description">
+        Los <strong>Árboles de Decisión</strong> son una herramienta fundamental en machine learning para la clasificación y regresión,
+        que modela decisiones y sus posibles consecuencias en una estructura de árbol jerárquica.
+      </p>
+    </div>
+  </div>
+
   <!-- Navbar de pestañas -->
   <section class="tabs-section">
     <div class="container">
-      <h2 class="section-title">Árboles de Decisión</h2>
-      <p class="section-description">
-        Un árbol de decisiones (o decision tree, en inglés) es un modelo de Machine Learning utilizado principalmente para tareas de clasificación y regresión. Se representa como una estructura en forma de árbol, donde cada nodo interno representa una decisión basada en una característica (o atributo) de los datos, y cada rama representa el resultado de esa decisión. Finalmente, cada hoja del árbol representa una predicción o una etiqueta de clase.
-      </p>
-      
       <nav class="tabs-nav">
         <button
           (click)="setActiveTab('teoria')"
@@ -19,7 +25,7 @@
           </div>
           <span>Teoría</span>
         </button>
-        
+
         <button
           (click)="setActiveTab('diagrama')"
           [class]="activeTab === 'diagrama' ? 'active' : ''"
@@ -31,7 +37,7 @@
           </div>
           <span>Diagrama Interactivo</span>
         </button>
-        
+
         <button
           (click)="setActiveTab('ejemplo')"
           [class]="activeTab === 'ejemplo' ? 'active' : ''"

@@ -1,64 +1,31 @@
 <div class="explicacion-container">
   <!-- Introducción -->
   <section class="intro-section">
-    <div class="intro-header">
-      <h2 class="section-title">¿Qué es el Aprendizaje por Refuerzo?</h2>
-      <p class="intro-text">
-        El <strong>Aprendizaje por Refuerzo </strong>  es una rama del machine learning en la que una máquina o agente aprende a tomar decisiones a través de la experiencia, interactuando con un entorno y recibiendo recompensas o castigos según las acciones que realiza. El objetivo del agente es aprender, mediante prueba y error, qué acciones le permiten maximizar la recompensa acumulada a largo plazo.
-        <br>
-        <br>
-        A diferencia de otros tipos de aprendizaje automático, como el supervisado (donde se usan datos etiquetados) o el no supervisado (que busca patrones en datos sin etiquetar), en el aprendizaje por refuerzo el agente no recibe indicaciones directas sobre cuál es la acción correcta. En su lugar, explora diferentes opciones y aprende de las consecuencias de sus decisiones, ajustando su comportamiento para obtener mejores resultados en el futuro
-      </p>
-    </div>
-    
-    <!-- Conceptos clave en cards horizontales -->
-    <div class="card-grid">
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Agente</h3>
-          <p class="card-description">La entidad que toma decisiones y aprende del entorno mediante la interacción continua y el feedback recibido.</p>
-        </div>
+
+    <!-- Conceptos clave en cards -->
+    <div class="concepts-grid">
+      <div class="concept-card">
+        <div class="concept-icon">🤖</div>
+        <h4>Agente</h4>
+        <p>La entidad que toma decisiones y aprende del entorno mediante la interacción continua y el feedback recibido.</p>
       </div>
 
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Entorno</h3>
-          <p class="card-description">El mundo o sistema en el que opera el agente, proporcionando estados y respondiendo a las acciones del agente.</p>
-        </div>
+      <div class="concept-card">
+        <div class="concept-icon">🌍</div>
+        <h4>Entorno</h4>
+        <p>El mundo o sistema en el que opera el agente, proporcionando estados y respondiendo a las acciones del agente.</p>
       </div>
 
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Acciones</h3>
-          <p class="card-description">Las decisiones o movimientos que puede tomar el agente en cada estado del entorno.</p>
-        </div>
+      <div class="concept-card">
+        <div class="concept-icon">⚡</div>
+        <h4>Acciones</h4>
+        <p>Las decisiones o movimientos que puede tomar el agente en cada estado del entorno.</p>
       </div>
 
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Recompensas</h3>
-          <p class="card-description">Señales numéricas que indican qué tan buena o mala fue una acción en un estado específico.</p>
-        </div>
+      <div class="concept-card">
+        <div class="concept-icon">🎯</div>
+        <h4>Recompensas</h4>
+        <p>Señales numéricas que indican qué tan buena o mala fue una acción en un estado específico.</p>
       </div>
     </div>
   </section>
@@ -66,43 +33,24 @@
   <!-- Conceptos Fundamentales -->
   <section class="concepts-section">
     <h2 class="section-title">Conceptos Fundamentales</h2>
-    
-    <div class="card-grid">
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Estados</h3>
-          <p class="card-description">Representan la situación actual del agente en el entorno. Incluye toda la información relevante para tomar decisiones.</p>
-        </div>
+
+    <div class="concepts-grid">
+      <div class="concept-card">
+        <div class="concept-icon">📍</div>
+        <h4>Estados</h4>
+        <p>Representan la situación actual del agente en el entorno. Incluye toda la información relevante para tomar decisiones.</p>
       </div>
 
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Política</h3>
-          <p class="card-description">Estrategia que define qué acción tomar en cada estado. Puede ser determinística o probabilística.</p>
-        </div>
+      <div class="concept-card">
+        <div class="concept-icon">📊</div>
+        <h4>Política</h4>
+        <p>Estrategia que define qué acción tomar en cada estado. Puede ser determinística o probabilística.</p>
       </div>
 
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Función de Valor</h3>
-          <p class="card-description">Estima el valor esperado a largo plazo de estar en un estado o tomar una acción específica.</p>
-        </div>
+      <div class="concept-card">
+        <div class="concept-icon">📈</div>
+        <h4>Función de Valor</h4>
+        <p>Estima el valor esperado a largo plazo de estar en un estado o tomar una acción específica.</p>
       </div>
     </div>
   </section>
@@ -110,14 +58,14 @@
   <!-- Algoritmo Q-Learning -->
   <section class="algorithm-section">
     <h2 class="section-title">Algoritmo Q-Learning</h2>
-    
+
     <div class="card">
       <div style="padding: 2rem;">
         <p class="intro-text" style="margin-bottom: 2rem;">
-          Q-Learning es uno de los algoritmos más populares de aprendizaje por refuerzo. 
+          Q-Learning es uno de los algoritmos más populares de aprendizaje por refuerzo.
           Aprende la función Q(s,a) que representa el valor de tomar la acción 'a' en el estado 's'.
         </p>
-        
+
         <div class="algorithm-steps">
           <div class="step-card">
             <div class="step-number">1</div>
@@ -160,110 +108,74 @@
     </div>
   </section>
 
-  <section>
-    <!-- Ventajas y Desventajas -->
-    <div class="pros-cons-section" style="margin-top: 2em;">
-  <h3>Ventajas y Desventajas</h3>
-  <div class="pros-cons-grid" style="display: flex; gap: 2em; flex-wrap: wrap;">
-    <div class="pros-section" style="flex: 1;">
-      <h4>✅ Ventajas</h4>
-      <ul>
-        <li>Permite aprender estrategias óptimas mediante prueba y error.</li>
-        <li>Se adapta a entornos dinámicos y desconocidos.</li>
-        <li>No requiere datos etiquetados previamente.</li>
-        <li>Puede resolver problemas de toma de decisiones secuenciales.</li>
-        <li>Aplicable en robótica, videojuegos, finanzas y más.</li>
-      </ul>
+  <!-- Ventajas y Desventajas -->
+  <section class="pros-cons-section">
+    <h3>Ventajas y Desventajas</h3>
+
+    <div class="pros-cons-grid">
+      <div class="pros-section">
+        <h4>✅ Ventajas</h4>
+        <ul>
+          <li>Aprendizaje autónomo sin supervisión directa</li>
+          <li>Capacidad de adaptarse a entornos cambiantes</li>
+          <li>Optimización de estrategias a largo plazo</li>
+          <li>Manejo eficiente de problemas secuenciales</li>
+          <li>Excelente para toma de decisiones complejas</li>
+        </ul>
+      </div>
+
+      <div class="cons-section">
+        <h4>❌ Desventajas</h4>
+        <ul>
+          <li>Requiere mucho tiempo de entrenamiento</li>
+          <li>Necesita gran cantidad de datos de prueba</li>
+          <li>Puede ser inestable durante el aprendizaje</li>
+          <li>Difícil de interpretar las decisiones</li>
+          <li>Sensible a la definición de recompensas</li>
+        </ul>
+      </div>
     </div>
-    <div class="cons-section" style="flex: 1;">
-      <h4>❌ Desventajas</h4>
-      <ul>
-        <li>Puede requerir mucho tiempo de entrenamiento.</li>
-        <li>Difícil de aplicar en espacios de estados o acciones muy grandes.</li>
-        <li>La exploración puede llevar a comportamientos subóptimos al inicio.</li>
-        <li>La recompensa retrasada puede dificultar el aprendizaje.</li>
-        <li>Puede ser sensible a la elección de hiperparámetros.</li>
-      </ul>
-    </div>
-  </div>
-</div>
   </section>
 
   <!-- Aplicaciones -->
   <section class="applications-section">
     <h2 class="section-title">Aplicaciones en el Mundo Real</h2>
-    
-    <div class="card-grid">
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1a3 3 0 000-6h-1m0 6V4m0 6v6m0-6h1a3 3 0 000-6h-1m0 6H9"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Videojuegos</h3>
-          <p class="card-description">AlphaGo, OpenAI Five, NPCs inteligentes que aprenden de la interacción con jugadores.</p>
-        </div>
+
+    <div class="concepts-grid">
+      <div class="concept-card">
+        <div class="concept-icon">🎮</div>
+        <h4>Videojuegos</h4>
+        <p>AlphaGo, OpenAI Five, NPCs inteligentes que aprenden de la interacción con jugadores.</p>
       </div>
-      
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Vehículos Autónomos</h3>
-          <p class="card-description">Navegación inteligente, estacionamiento automático y toma de decisiones en tiempo real.</p>
-        </div>
+
+      <div class="concept-card">
+        <div class="concept-icon">🚗</div>
+        <h4>Vehículos Autónomos</h4>
+        <p>Navegación inteligente, estacionamiento automático y toma de decisiones en tiempo real.</p>
       </div>
-      
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Robótica Industrial</h3>
-          <p class="card-description">Control adaptativo de brazos robóticos y optimización de procesos de manufactura.</p>
-        </div>
+
+      <div class="concept-card">
+        <div class="concept-icon">🤖</div>
+        <h4>Robótica Industrial</h4>
+        <p>Control adaptativo de brazos robóticos y optimización de procesos de manufactura.</p>
       </div>
-      
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Trading Financiero</h3>
-          <p class="card-description">Estrategias de inversión automatizadas y gestión inteligente de riesgos financieros.</p>
-        </div>
+
+      <div class="concept-card">
+        <div class="concept-icon">💳</div>
+        <h4>Trading Financiero</h4>
+        <p>Estrategias de inversión automatizadas y gestión inteligente de riesgos financieros.</p>
       </div>
-      
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Sistemas de Recomendación</h3>
-          <p class="card-description">Personalización inteligente en plataformas como Netflix, Spotify y Amazon.</p>
-        </div>
+
+      <div class="concept-card">
+        <div class="concept-icon">🎯</div>
+        <h4>Sistemas de Recomendación</h4>
+        <p>Personalización inteligente en plataformas como Netflix, Spotify y Amazon.</p>
       </div>
-      
-      <div class="card card-horizontal">
-        <div class="card-icon">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-          </svg>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Descubrimiento de Fármacos</h3>
-          <p class="card-description">Optimización de moléculas y aceleración del diseño de nuevos medicamentos.</p>
-        </div>
+
+      <div class="concept-card">
+        <div class="concept-icon">💊</div>
+        <h4>Descubrimiento de Fármacos</h4>
+        <p>Optimización de moléculas y aceleración del diseño de nuevos medicamentos.</p>
       </div>
     </div>
   </section>

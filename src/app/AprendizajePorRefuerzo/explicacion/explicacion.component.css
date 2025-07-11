@@ -1,103 +1,41 @@
-/* Estilos para el componente de explicación */
+/* Estilos específicos para el componente de explicación */
+/* Las clases base se importan desde styles.css */
+
 .explicacion-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  /* Usa las clases globales .container */
 }
 
-/* Secciones */
-section {
-  margin-bottom: 3rem;
-}
-
+/* Secciones específicas del componente */
 .intro-header {
   text-align: center;
-  margin-bottom: 3rem;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-primary, #2d3748);
-  margin-bottom: 1rem;
-  text-align: center;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .intro-text {
-  font-size: 1.2rem;
+  font-size: var(--font-size-xl);
   line-height: 1.8;
-  color: var(--text-secondary, #4a5568);
-  max-width: 800px;
+  color: var(--text-secondary);
+  max-width: var(--content-max-width);
   margin: 0 auto;
   text-align: center;
 }
 
-/* Algoritmo Steps */
+/* Pasos del algoritmo - usando componentes globales */
 .algorithm-steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.step-card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(102, 126, 234, 0.05);
-  border-radius: 12px;
-  border-left: 4px solid var(--primary-color, #667eea);
-  transition: all 0.3s ease;
-}
-
-.step-card:hover {
-  transform: translateX(4px);
-  background: rgba(102, 126, 234, 0.1);
-}
-
-.step-number {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  background: var(--primary-color, #667eea);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.step-content {
-  flex: 1;
-  font-size: 1rem;
-  line-height: 1.6;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .section-title {
-    font-size: 2rem;
-  }
-  
   .intro-text {
-    font-size: 1.1rem;
+    font-size: var(--font-size-lg);
   }
-  
+
   .algorithm-steps {
     grid-template-columns: 1fr;
-  }
-  
-  .step-card {
-    padding: 0.75rem;
-  }
-  
-  .step-number {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
   }
 }
 .pros-cons-section {

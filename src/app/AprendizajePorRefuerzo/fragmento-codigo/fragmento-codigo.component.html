@@ -1,58 +1,99 @@
-<div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
-  <!-- Columna izquierda: Código y resultados -->
-  <div style="flex: 1; min-width: 320px;">
-    <label style="font-weight: bold;">Código Python (Q-learning):</label>
-    <pre style="background: #23272e; color: #e3e3e3; padding: 1em; border-radius: 8px; font-size: 0.98em; font-family: 'Fira Mono', 'Consolas', monospace; overflow-x: auto; box-shadow: 0 2px 8px #0001;">
-import numpy as np
-import random
+<div class="playground-container">
+  <!-- Título -->
+  <h2 class="playground-title">🧠 Playground de Aprendizaje por Refuerzo</h2>
+  <p class="playground-description">
+    Experimenta con algoritmos de aprendizaje por refuerzo ejecutándolos directamente en tu navegador usando Python y WebAssembly.
+  </p>
 
-# Parámetros del entorno
-n_states = 4  # 4 estados (0, 1, 2, 3)
-actions = [{{'['}}0, 1{{']'}}]  # 0 = izquierda, 1 = derecha
-rewards = [{{'['}}0, 0, 0, 1{{']'}}]  # recompensa solo al llegar al estado 3
-
-# Matriz Q inicial
-Q = np.zeros((n_states, len(actions)))
-
-# Parámetros de aprendizaje
-alpha = 0.1     # tasa de aprendizaje
-gamma = 0.9     # factor de descuento
-epsilon = 0.2   # exploración
-
-# Función para elegir acción con ε-greedy
-def choose_action(state):
-    if random.uniform(0, 1) < epsilon:
-        return random.choice(actions)
-    else:
-        return np.argmax(Q[state])
-
-# Simulación de episodios
-for episode in range(100):
-    state = 0  # iniciar siempre desde el estado 0
-
-    while state != 3:  # hasta llegar al estado terminal
-        action = choose_action(state)
-
-        # Transición de estado
-        next_state = state + 1 if action == 1 else max(0, state - 1)
-
-        # Actualización Q-learning
-        Q[state, action] = Q[state, action] + alpha * (
-            rewards[next_state] + gamma * np.max(Q[next_state]) - Q[state, action]
-        )
-
-        state = next_state
-
-# Mostrar la matriz Q aprendida
-print("Q-table aprendida:")
-print(Q)
-    </pre>
+  <!-- Selector de ejemplos -->
+  <div class="examples-section">
+    <h3>Ejemplos disponibles:</h3>
+    <div class="examples-grid">
+      <div 
+        *ngFor="let exampleKey of getExampleKeys()" 
+        class="example-card"
+        [class.active]="selectedExample === exampleKey"
+        (click)="selectExample(exampleKey)"
+      >
+        <div class="example-header">
+          <h4>{{ examples[exampleKey].title }}</h4>
+          <span 
+            class="difficulty-badge"
+            [style.background-color]="getDifficultyColor(examples[exampleKey].difficulty)"
+          >
+            {{ examples[exampleKey].difficulty }}
+          </span>
+        </div>
+        <p class="example-description">{{ examples[exampleKey].description }}</p>
+        <div class="concepts-tags">
+          <span *ngFor="let concept of examples[exampleKey].concepts" class="concept-tag">
+            {{ concept }}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- Columna derecha: Explicación -->
-  <div style="flex: 1; min-width: 320px;">
-    <label style="font-weight: bold;">¿Qué hace este código?</label>
-    <div style="background: #fffde7; padding: 1.2em 1em; border-radius: 8px; font-size: 1.05em; color: #444; box-shadow: 0 2px 8px #0001;">
-      Este código implementa Q-learning para que un agente aprenda a llegar al estado 3 en un entorno con 4 estados (0 a 3). En cada estado, puede moverse a la izquierda (acción 0) o a la derecha (acción 1). Solo obtener el estado 3 da recompensa (1), los demás 0. El agente elige acciones con una mezcla de exploración y explotación (ε-greedy). Luego actualiza la matriz Q, que guarda el valor esperado de cada acción en cada estado, usando la recompensa recibida y la mejor recompensa futura estimada. Esto se repite por 100 episodios empezando siempre en el estado 0. Al final, la matriz Q muestra qué acción es mejor en cada estado para maximizar la recompensa. Así el agente “aprende” a tomar decisiones óptimas en este entorno simple.
+
+  <!-- Información del ejemplo seleccionado -->
+  <div class="selected-example-info">
+    <h3>{{ getSelectedExample().title }}</h3>
+    <p>{{ getSelectedExample().description }}</p>
+    <div class="concepts-list">
+      <strong>Conceptos clave:</strong>
+      <span *ngFor="let concept of getSelectedExample().concepts; let last = last" class="concept-inline">
+        {{ concept }}<span *ngIf="!last">, </span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Estado de carga -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Cargando Python WebAssembly y Monaco Editor...</p>
+  </div>
+
+  <!-- Área principal del playground -->
+  <div class="playground-main" *ngIf="!isLoading">
+    <!-- Editor de código -->
+    <div class="code-section">
+      <div class="code-header">
+        <h4>📝 Editor de Código</h4>
+        <button 
+          class="run-button"
+          (click)="runCode()"
+          [disabled]="isRunning"
+          [class.running]="isRunning"
+        >
+          <span *ngIf="!isRunning">▶️ Ejecutar</span>
+          <span *ngIf="isRunning">⏳ Ejecutando...</span>
+        </button>
+      </div>
+      <div id="code-editor" class="code-editor"></div>
+    </div>
+
+    <!-- Resultados -->
+    <div class="results-section">
+      <div class="results-header">
+        <h4>📊 Resultados</h4>
+      </div>
+      
+      <!-- Salida del código -->
+      <div class="output-container" *ngIf="output">
+        <h5>Salida:</h5>
+        <pre class="output">{{ output }}</pre>
+      </div>
+      
+      <!-- Errores -->
+      <div class="error-container" *ngIf="error">
+        <h5>Error:</h5>
+        <pre class="error">{{ error }}</pre>
+      </div>
+      
+      <!-- Placeholder cuando no hay resultados -->
+      <div class="no-results" *ngIf="!output && !error">
+        <p>🚀 Los resultados aparecerán aquí después de ejecutar el código.</p>
+        <p>💡 Puedes modificar el código y experimentar con diferentes parámetros.</p>
+      </div>
     </div>
   </div>
 </div>
