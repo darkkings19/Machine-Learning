@@ -109,3 +109,7 @@ ng serve
 Una vez cargado, abre tu navegador y visita:
 
  [http://localhost:4200](http://localhost:4200)
+
+
+## Referencias
+[Web_Assembly]([http://localhost:4200](https://dev.to/railsstudent/angular-on-steroids-elevating-performance-with-webassembly-43gb))
