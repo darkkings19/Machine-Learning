@@ -114,3 +114,6 @@ Una vez cargado, abre tu navegador y visita:
 ## Referencias Y Links Para Profundizar En Machine Learning
 [Web Assembly](https://dev.to/railsstudent/angular-on-steroids-elevating-performance-with-webassembly-43gb)
 [Machine Learning](https://www.sap.com/latinamerica/products/artificial-intelligence/what-is-machine-learning.html)
+[Aborl de Decisiones](https://scielo.pt/scielo.php?pid=S1646-98952023000300084&script=sci_arttext&tlng=es)
+[Aborl de Decisiones: Gómez, C. A. R. (2020). Aplicación del Machine Learning en agricultura de precisión. Revista Cintex, 25(2), 14-27.]
+[Aprndizaje por Refuerzo](https://www.ibm.com/es-es/think/topics/reinforcement-learning)
