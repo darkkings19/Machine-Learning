@@ -1,0 +1,48 @@
+<div class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen p-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Botones de acciones -->
+    <div class="mb-6 flex flex-wrap gap-3">
+      <button 
+        (click)="clearOutput()"
+        class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center gap-2">Limpiar Salida
+      </button>
+    </div>
+
+    <!-- Editor de código y salida -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Editor de código -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 flex justify-between items-center">
+          <h2 class="text-lg font-semibold">Editor de Código Python</h2>
+          <button 
+            (click)="runPythonCode(userCode)"
+            [disabled]="isLoading || isExecuting"
+            class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-500 px-4 py-2 rounded text-sm transition-colors flex items-center gap-2"
+          >
+            <span *ngIf="isExecuting" class="animate-spin">⏳</span>
+            <span *ngIf="!isExecuting">▶</span>
+            {{ isExecuting ? 'Ejecutando...' : 'Ejecutar' }}
+          </button>
+        </div>
+        <div class="p-4">
+          <textarea 
+            [(ngModel)]="userCode" 
+            class="w-full h-[800px] p-3 border border-gray-300 rounded-lg font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Escribe tu código Python aquí..."
+            [disabled]="isLoading"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Salida del código -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-gradient-to-r from-green-600 to-green-700 text-white p-4">
+          <h2 class="text-lg font-semibold">Salida del Programa</h2>
+        </div>
+        <div class="p-4 bg-gray-900 text-green-400 font-mono text-sm overflow-auto h-[800px]">
+          <pre class="whitespace-pre-wrap">{{ output || 'La salida aparecerá aquí...' }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

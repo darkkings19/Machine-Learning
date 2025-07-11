@@ -1,0 +1,321 @@
+<!-- Editor Interactivo de Árboles de Decisión -->
+<div class="interactive-diagram">
+  <h3>Editor Interactivo de Árboles de Decisión</h3>
+  <p class="diagram-description">
+    Interactúa con el árbol de decisión. Haz clic para seleccionar nodos y editar sus valores de condición.
+    Usa los controles del panel izquierdo para simular diferentes escenarios.
+  </p>
+
+  <div class="diagram-layout">
+    <!-- Panel Lateral Izquierdo - Simulación -->
+    <div class="simulation-sidebar">
+      <div class="simulation-panel">
+        <h4 class="flex items-center">
+          <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          Simulación Interactiva
+        </h4>
+        
+        <!-- Controles de Entrada -->
+        <div class="input-controls">
+          <!-- Temperatura -->
+          <div class="control-group">
+            <label class="control-label">
+              <svg class="w-4 h-4 text-red-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H9a1 1 0 00-1 1v10a4 4 0 008 0zM8 14V6"></path>
+              </svg>
+              Temperatura: <span class="value-display">{{temperatureValue}}°C</span>
+            </label>
+            <input 
+              type="range" 
+              min="0" 
+              max="50" 
+              step="1"
+              [(ngModel)]="temperatureValue"
+              class="range-slider temperature"
+              (input)="updateSimulation()">
+            <div class="range-labels">
+              <span>0°C</span>
+              <span>25°C</span>
+              <span>50°C</span>
+            </div>
+          </div>
+
+          <!-- Humedad -->
+          <div class="control-group">
+            <label class="control-label">
+              <svg class="w-4 h-4 text-blue-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+              </svg>
+              Humedad: <span class="value-display">{{humidityValue}}%</span>
+            </label>
+            <input 
+              type="range" 
+              min="0" 
+              max="100" 
+              step="5"
+              [(ngModel)]="humidityValue"
+              class="range-slider humidity"
+              (input)="updateSimulation()">
+            <div class="range-labels">
+              <span>0%</span>
+              <span>50%</span>
+              <span>100%</span>
+            </div>
+          </div>
+
+          <!-- Viento -->
+          <div class="control-group">
+            <label class="control-label">
+              <svg class="w-4 h-4 text-gray-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11H1m8 0h10m-4-8v16m4-16l-4 4m4-4l-4-4"></path>
+              </svg>
+              Viento
+            </label>
+            <select 
+              [(ngModel)]="windValue"
+              class="select-input"
+              (change)="updateSimulation()">
+              <option value="bajo">Bajo</option>
+              <option value="medio">Medio</option>
+              <option value="alto">Alto</option>
+            </select>
+          </div>
+
+          <!-- Precipitación -->
+          <div class="control-group">
+            <label class="control-label">
+              <svg class="w-4 h-4 text-blue-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6l4-4 4 4M8 6v12l4 4 4-4V6"></path>
+              </svg>
+              Precipitación
+            </label>
+            <select 
+              [(ngModel)]="precipitationValue"
+              class="select-input"
+              (change)="updateSimulation()">
+              <option value="ninguna">Ninguna</option>
+              <option value="ligera">Ligera</option>
+              <option value="moderada">Moderada</option>
+              <option value="fuerte">Fuerte</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Editor de Condiciones -->
+        <div class="condition-editor" *ngIf="selectedNode && editingCondition">
+          <h4 class="flex items-center">
+            <svg class="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            Editar Condición
+          </h4>
+          
+          <div class="condition-info">
+            <p class="node-name">
+              <strong>Nodo:</strong> {{selectedNode.name}}
+            </p>
+          </div>
+          
+          <div class="condition-controls" *ngIf="!isEditingCondition">
+            <div class="condition-display">
+              <span class="attribute-name">{{editingCondition.attribute}}</span>
+              <span class="operator">{{editingCondition.operator}}</span>
+              <span class="condition-value">{{editingCondition.value}}</span>
+            </div>
+            <button 
+              class="edit-condition-btn"
+              (click)="startEditingCondition()">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+              Editar Valor
+            </button>
+          </div>
+          
+          <div class="condition-edit-form" *ngIf="isEditingCondition">
+            <div class="edit-group">
+              <label class="edit-label">
+                <svg class="w-4 h-4 text-blue-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                </svg>
+                Nuevo Valor para {{editingCondition.attribute}}:
+              </label>
+              <div class="edit-input-container">
+                <span class="attribute-prefix">{{editingCondition.attribute}} {{editingCondition.operator}}</span>
+                <input 
+                  type="number"
+                  [(ngModel)]="editingCondition.value"
+                  class="condition-input"
+                  placeholder="Ingresa el valor..."
+                  (keyup.enter)="saveConditionEdit()"
+                  (keyup.escape)="cancelConditionEdit()">
+                <span class="unit-suffix" *ngIf="editingCondition.attribute.toLowerCase().includes('temperatura')">°C</span>
+                <span class="unit-suffix" *ngIf="editingCondition.attribute.toLowerCase().includes('humedad')">%</span>
+              </div>
+            </div>
+            
+            <div class="edit-buttons">
+              <button class="save-condition-btn" (click)="saveConditionEdit()">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Guardar
+              </button>
+              <button class="cancel-condition-btn" (click)="cancelConditionEdit()">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="results-sidebar">
+      <div class="results-panel">
+        <h4 class="flex items-center">
+          <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Resultado Visual
+        </h4>
+        
+        <!-- Resultado de la Simulación -->
+        <div class="visual-result" *ngIf="simulationResult">
+          <div class="result-summary">
+            <div class="result-icon">
+              <svg class="w-8 h-8" [ngClass]="getResultClass(simulationResult)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="result-text">
+              <h5>Resultado Final:</h5>
+              <div class="result-value" [ngClass]="getResultClass(simulationResult)">
+                {{simulationResult}}
+              </div>
+            </div>
+          </div>
+          
+          <div class="path-stats">
+            <div class="stat-item">
+              <span class="stat-number">{{simulationPath.length}}</span>
+              <span class="stat-label">Nodos Visitados</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">{{decisionSteps.length}}</span>
+              <span class="stat-label">Decisiones</span>
+            </div>
+          </div>
+          
+          <div class="visual-legend">
+            <h6>Leyenda Visual:</h6>
+            <div class="legend-items">
+              <div class="legend-item">
+                <div class="legend-circle path-node-demo"></div>
+                <span>Nodo del Camino</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-circle path-result-demo"></div>
+                <span>Resultado Final</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-line path-link-demo"></div>
+                <span>Camino Seguido</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mensaje cuando no hay resultados -->
+        <div class="no-results" *ngIf="!simulationResult">
+          <div class="no-results-content">
+            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <h6 class="text-gray-500 text-center">Sin Simulación</h6>
+            <p class="text-gray-400 text-center text-sm mt-2">
+              Ejecuta una simulación para ver el camino visual en el árbol.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- Panel Lateral Derecho - Resultados -->
+    
+
+    <!-- Contenido Principal -->
+    <div class="main-content">
+      <!-- Información del Nodo Seleccionado -->
+      <div class="node-info" *ngIf="selectedNode">
+        <div class="info-content">
+          <h4>Nodo Seleccionado</h4>
+          <div class="info-details">
+            <p><strong>ID:</strong> {{ selectedNode.id }}</p>
+            <p><strong>Nombre:</strong> {{ selectedNode.name }}</p>
+            <p><strong>Tipo:</strong> 
+              <span [ngClass]="{
+                'type-badge': true,
+                'root': selectedNode.type === 'root',
+                'decision': selectedNode.type === 'decision',
+                'leaf': selectedNode.type === 'leaf'
+              }">
+                {{ selectedNode.type === 'root' ? 'Raíz' : 
+                   selectedNode.type === 'decision' ? 'Decisión' : 'Hoja' }}
+              </span>
+            </p>
+            <p><strong>Hijos:</strong> {{ selectedNode.children?.length || 0 }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenedor del Árbol -->
+      <div class="tree-container">
+        <div #treeContainer class="d3-tree"></div>
+      </div>
+      
+      <!-- Leyenda -->
+      <div class="tree-legend">
+        <div class="legend-item">
+          <span class="legend-node root"></span>
+          <span>Nodo Raíz</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-node decision"></span>
+          <span>Nodo de Decisión</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-node leaf"></span>
+          <span>Nodo Hoja</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-node selected"></span>
+          <span>Nodo Seleccionado</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-node path-highlight"></span>
+          <span>Camino de Simulación</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-node result-highlight"></span>
+          <span>Resultado Final</span>
+        </div>
+      </div>
+
+      <!-- Instrucciones -->
+      <div class="instructions">
+        <h4>Instrucciones de Uso:</h4>
+        <ul>
+          <li><strong>Seleccionar:</strong> Haz clic en un nodo para seleccionarlo</li>
+          <li><strong>Editar Valores:</strong> Selecciona un nodo con condición para cambiar sus valores en el panel izquierdo</li>
+          <li><strong>Simulación:</strong> Usa los controles del lado izquierdo para probar el árbol</li>
+          <li><strong>Árbol por Defecto:</strong> El árbol se carga automáticamente con un ejemplo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

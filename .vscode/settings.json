@@ -1,4 +1,5 @@
 {
-    "vscode-pokemon.pokemonSize": "small",
-    "vscode-pokemon.position": "explorer"
+    "vscode-pokemon.pokemonSize": "medium",
+    "vscode-pokemon.position": "explorer",
+    "vscode-pokemon.theme": "none"
 }

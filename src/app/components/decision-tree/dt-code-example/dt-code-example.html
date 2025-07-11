@@ -1,0 +1,10 @@
+<section class="simulation-section">
+  <div class="container">
+    <h2 class="section-title">Implementación Práctica de Árboles de Decisión</h2>
+    <p class="section-description">
+      Este código implementa un clasificador de árboles de decisión para reconocer tipos de flores Iris basándose en cuatro características: largo y ancho del sépalo, y largo y ancho del pétalo. El algoritmo carga el dataset Iris con 150 flores etiquetadas, divide los datos en conjuntos de entrenamiento y prueba, construye un árbol que aprende automáticamente las mejores preguntas de decisión para distinguir entre Setosa, Versicolor y Virginica. Finalmente evalúa la precisión del modelo, muestra la importancia de cada característica, y demuestra predicciones en nuevas flores, proporcionando una representación visual de cómo el algoritmo toma decisiones paso a paso como un diagrama de flujo interpretable.
+    </p>
+
+    <app-python-runner [initialCode]="decisionTreeCode"></app-python-runner>
+  </div>
+</section>

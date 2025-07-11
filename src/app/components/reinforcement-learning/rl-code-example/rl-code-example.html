@@ -1,0 +1,10 @@
+<section class="simulation-section">
+  <div class="container">
+    <h2 class="section-title">{{ qlearningTitle }}</h2>
+    <p class="section-description">
+      Este código implementa Q-Learning en un entorno Grid World simplificado de cinco estados (0 a 4), donde un agente debe aprender a navegar desde el estado inicial hasta el estado objetivo. El algoritmo utiliza una estrategia epsilon-greedy para equilibrar exploración y explotación, actualizando iterativamente una matriz Q-table mediante la ecuación de Bellman. Durante 100 episodios de entrenamiento, el agente recibe recompensas positivas al alcanzar el objetivo y penalizaciones por cada movimiento, aprendiendo gradualmente la política óptima. Al finalizar, la matriz Q muestra los valores esperados de cada acción en cada estado, revelando cómo el algoritmo codifica el conocimiento sobre las mejores decisiones para maximizar la recompensa acumulada.
+    </p>
+
+    <app-python-runner></app-python-runner>
+  </div>
+</section>

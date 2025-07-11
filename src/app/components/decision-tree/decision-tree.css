@@ -1,0 +1,49 @@
+.arbol-container {
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--background-light);
+  margin-top: 70px; /* Compensar exactamente la altura del navbar principal */
+  padding-top: 1rem; /* Espaciado adicional para mejor separación visual */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Header profesional */
+.header-section {
+  background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
+  border-bottom: 1px solid var(--light-grey);
+  box-shadow: var(--shadow-professional);
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+/* Tabs Section */
+.tabs-section {
+  background: var(--white);
+  box-shadow: var(--shadow-light);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 0;
+  padding: 0.5rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.tabs-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.main-content {
+  min-height: calc(100vh - 100px);
+  padding: 0;
+}

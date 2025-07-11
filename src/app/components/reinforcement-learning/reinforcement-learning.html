@@ -1,0 +1,69 @@
+<div class="aprendizaje-container">
+    <!-- Header profesional -->
+  <div class="header-section">
+    <div class="container">
+      <h1 class="section-title">¿Qué es el Aprendizaje por Refuerzo?</h1>
+      <p class="section-description">
+        El <strong>Aprendizaje por Refuerzo </strong>  es una rama del machine learning en la que una máquina o agente aprende a tomar decisiones a través de la experiencia, interactuando con un entorno y recibiendo recompensas o castigos según las acciones que realiza. El objetivo del agente es aprender, mediante prueba y error, qué acciones le permiten maximizar la recompensa acumulada a largo plazo.
+        <br>
+        A diferencia de otros tipos de aprendizaje automático, como el supervisado (donde se usan datos etiquetados) o el no supervisado (que busca patrones en datos sin etiquetar), en el aprendizaje por refuerzo el agente no recibe indicaciones directas sobre cuál es la acción correcta. En su lugar, explora diferentes opciones y aprende de las consecuencias de sus decisiones, ajustando su comportamiento para obtener mejores resultados en el futuro
+      </p>
+    </div>
+  </div>
+  <!-- Navbar de pestañas -->
+  <section class="tabs-section">
+    <div class="container">
+      <nav class="tabs-nav">
+        <button
+          (click)="setActiveTab('teoria')"
+          [class]="activeTab === 'teoria' ? 'active' : ''"
+          class="tab-button flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+          <span>Teoría</span>
+        </button>
+
+        <button
+          (click)="setActiveTab('entorno')"
+          [class]="activeTab === 'entorno' ? 'active' : ''"
+          class="tab-button flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <span>Entorno Interactivo</span>
+        </button>
+
+        <button
+          (click)="setActiveTab('codigo')"
+          [class]="activeTab === 'codigo' ? 'active' : ''"
+          class="tab-button flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          <span>Código</span>
+        </button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Contenido de las pestañas -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Pestaña de Teoría -->
+      <div *ngIf="activeTab === 'teoria'" class="tab-content">
+        <app-rl-theory></app-rl-theory>
+      </div>
+
+      <!-- Pestaña de Entorno Interactivo -->
+      <div *ngIf="activeTab === 'entorno'" class="tab-content">
+        <app-rl-diagram></app-rl-diagram>
+      </div>
+
+      <!-- Pestaña de Código -->
+      <div *ngIf="activeTab === 'codigo'" class="tab-content">
+        <app-rl-code-example></app-rl-code-example>
+      </div>
+    </div>
+  </main>
+</div>
