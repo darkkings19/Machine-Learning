@@ -452,7 +452,6 @@
   
   .control-btn {
     font-size: 0.8rem;
-    padding: 0.5rem 0.8rem;
   }
   
   .tree-container {
@@ -513,4 +512,40 @@
   .instructions {
     padding: 1.5rem;
   }
+}
+
+/* Mensaje de simulación */
+.simulation-message {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #3b82f6;
+  min-height: 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  user-select: none;
+}
+
+/* --- ESTILOS PARA RESALTAR NODOS Y ARISTAS DURANTE LA SIMULACION --- */
+
+/* Nodo resaltado */
+.d3-tree .node.highlighted circle {
+  stroke: #f59e0b;       /* borde naranja */
+  stroke-width: 4px;
+  fill: #fbbf24;         /* fondo amarillo claro */
+  filter: drop-shadow(0 0 5px #f59e0b);
+  transition: all 0.3s ease;
+}
+
+/* Texto del nodo resaltado */
+.d3-tree .node.highlighted text {
+  fill: #b45309;        /* texto naranja oscuro */
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+/* Arista resaltada */
+.d3-tree .link.highlighted {
+  stroke: #f59e0b;        /* línea naranja */
+  stroke-width: 4px;
+  transition: all 0.3s ease;
 }

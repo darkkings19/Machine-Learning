@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 declare var d3: any;
 
 interface TreeNode {
-  id: string;
+  id?: string;
   name: string;
-  type: 'root' | 'decision' | 'leaf';
+  type?: 'root' | 'decision' | 'leaf';
   children?: TreeNode[];
   parent?: TreeNode;
   x?: number;
@@ -19,12 +19,12 @@ interface TreeNode {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './diagrama.component.html',
-  styleUrl: './diagrama.component.css'
+  styleUrls: ['./diagrama.component.css']
 })
 export class DiagramaArbolComponent implements OnInit, AfterViewInit {
   @ViewChild('treeContainer', { static: false }) treeContainer!: ElementRef;
+  @ViewChild('messageBox', { static: false }) messageBox!: ElementRef;
 
-  // Estado del árbol
   treeData: TreeNode = {
     id: '1',
     name: 'Nodo Raíz',
@@ -34,17 +34,17 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
 
   selectedNode: TreeNode | null = null;
   nodeCounter = 1;
-  
-  // Estado de edición
+
   isEditing = false;
   editingText = '';
+  simulationInput: string = '';
 
-  // Variables D3
   svg: any;
   g: any;
   width = 1200;
   height = 800;
-  
+  root: any;
+
   ngOnInit() {}
 
   ngAfterViewInit() {
@@ -66,6 +66,7 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
 
   private initializeTree() {
     this.setupSVG();
+    this.root = d3.hierarchy(this.treeData);
     this.updateTree();
   }
 
@@ -81,22 +82,31 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
 
     this.g = this.svg.append("g")
       .attr("transform", "translate(80, 80)");
+
+    this.svg.on("click", () => {
+      this.selectedNode = null;
+      this.updateTree();
+      this.clearHighlights();
+      this.showMessage('');
+    });
   }
 
-  private updateTree() {
+  updateTree() {
     const treeLayout = d3.tree().size([this.height - 200, this.width - 200]);
-    const root = d3.hierarchy(this.treeData);
-    treeLayout(root);
+    this.root = d3.hierarchy(this.treeData);
+    treeLayout(this.root);
 
-    // Limpiar elementos anteriores
+    this.root.descendants().forEach((d: any) => d.y = d.depth * 180);
+
     this.g.selectAll(".link").remove();
     this.g.selectAll(".node").remove();
 
-    // Crear enlaces
+    // Dibuja enlaces con id único
     const links = this.g.selectAll(".link")
-      .data(root.links())
+      .data(this.root.links())
       .enter().append("path")
       .attr("class", "link")
+      .attr("id", (d: any) => `link-${d.source.data.id}-${d.target.data.id}`)
       .attr("d", d3.linkHorizontal()
         .x((d: any) => d.y)
         .y((d: any) => d.x))
@@ -104,15 +114,15 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
       .style("stroke", "#cbd5e0")
       .style("stroke-width", 2);
 
-    // Crear nodos
+    // Dibuja nodos con id único
     const nodes = this.g.selectAll(".node")
-      .data(root.descendants())
+      .data(this.root.descendants())
       .enter().append("g")
       .attr("class", "node")
+      .attr("id", (d: any) => `node-${d.data.id}`)
       .attr("transform", (d: any) => `translate(${d.y},${d.x})`)
       .style("cursor", "pointer");
 
-    // Círculos de nodos (más grandes)
     nodes.append("circle")
       .attr("r", 30)
       .style("fill", (d: any) => {
@@ -130,7 +140,6 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
       .style("stroke-width", 2)
       .style("filter", "drop-shadow(0 2px 4px rgba(0,0,0,0.1))");
 
-    // Rectángulo de fondo para el texto
     nodes.append("rect")
       .attr("x", (d: any) => d.children ? -80 : 40)
       .attr("y", -12)
@@ -142,7 +151,6 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
       .style("stroke-width", 1)
       .style("filter", "drop-shadow(0 1px 2px rgba(0,0,0,0.1))");
 
-    // Texto de nodos mejorado
     nodes.append("text")
       .attr("dy", ".35em")
       .attr("x", (d: any) => d.children ? -40 : 80)
@@ -157,11 +165,9 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
         return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
       });
 
-    // Tooltip para mostrar el nombre completo
     nodes.append("title")
-      .text((d: any) => `${d.data.name}\nTipo: ${d.data.type}\nID: ${d.data.id}`);
+      .text((d: any) => `${d.data.name}\nTipo: ${d.data.type || 'undefined'}\nID: ${d.data.id || 'undefined'}`);
 
-    // Event listeners para interactividad
     nodes.on("click", (event: any, d: any) => {
       event.stopPropagation();
       this.selectNode(d.data);
@@ -170,12 +176,6 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
     nodes.on("dblclick", (event: any, d: any) => {
       event.stopPropagation();
       this.startEditing(d.data);
-    });
-
-    // Click en el fondo para deseleccionar
-    this.svg.on("click", () => {
-      this.selectedNode = null;
-      this.updateTree();
     });
   }
 
@@ -222,7 +222,7 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
     if (!this.selectedNode.children) {
       this.selectedNode.children = [];
     }
-    
+
     this.selectedNode.children.push(newNode);
     this.updateTree();
   }
@@ -238,8 +238,7 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    // Encontrar el nodo padre y eliminar el nodo actual
-    this.removeNodeFromTree(this.treeData, this.selectedNode.id);
+    this.removeNodeFromTree(this.treeData, this.selectedNode.id!);
     this.selectedNode = null;
     this.updateTree();
   }
@@ -266,14 +265,13 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
     }
 
     this.selectedNode.type = type;
-    
-    // Si es hoja, eliminar hijos
+
     if (type === 'leaf') {
       this.selectedNode.children = [];
     } else if (!this.selectedNode.children) {
       this.selectedNode.children = [];
     }
-    
+
     this.updateTree();
   }
 
@@ -303,51 +301,112 @@ export class DiagramaArbolComponent implements OnInit, AfterViewInit {
   loadExampleTree() {
     this.treeData = {
       id: '1',
-      name: 'Temperatura > 25°C?',
+      name: "¿Temperatura > 30?",
       type: 'root',
       children: [
-        {
-          id: '2',
-          name: 'Humedad > 70%?',
-          type: 'decision',
-          children: [
-            {
-              id: '4',
-              name: 'No realizar actividad',
-              type: 'leaf',
-              children: []
-            },
-            {
-              id: '5',
-              name: 'Realizar actividad',
-              type: 'leaf',
-              children: []
-            }
-          ]
-        },
+        { id: '2', name: "Clase: Calor", type: 'leaf' },
         {
           id: '3',
-          name: 'Viento fuerte?',
+          name: "¿Humedad == alta?",
           type: 'decision',
           children: [
-            {
-              id: '6',
-              name: 'No realizar actividad',
-              type: 'leaf',
-              children: []
-            },
-            {
-              id: '7',
-              name: 'Realizar actividad',
-              type: 'leaf',
-              children: []
-            }
+            { id: '4', name: "Clase: Húmedo", type: 'leaf' },
+            { id: '5', name: "Clase: Seco", type: 'leaf' }
           ]
         }
       ]
     };
-    this.nodeCounter = 7;
+    this.nodeCounter = 5;  // Ajusta si añades más nodos después
     this.selectedNode = null;
     this.updateTree();
+  }
+
+  showMessage(text: string, timeout = 4000) {
+    if (!this.messageBox) return;
+    this.messageBox.nativeElement.textContent = text;
+    if (timeout > 0) {
+      setTimeout(() => {
+        if (this.messageBox.nativeElement.textContent === text) {
+          this.messageBox.nativeElement.textContent = '';
+        }
+      }, timeout);
+    }
+  }
+
+  clearHighlights() {
+    this.g.selectAll('path.link').classed('highlighted', false);
+    this.g.selectAll('g.node').classed('highlighted', false);
+  }
+
+  parseCondition(text: string) {
+    const clean = text.replace(/[¿?]/g, '').trim();
+    const match = clean.match(/^(.+?)\s*(==|!=|>|<)\s*(.+)$/);
+    if (!match) return null;
+    const attr = match[1].trim();
+    const op = match[2];
+    const valRaw = match[3].trim();
+    const value = isNaN(Number(valRaw)) ? valRaw : Number(valRaw);
+    return { attr, op, value };
+  }
+
+  simulateClassification(node: any, values: { [key: string]: any }) {
+    this.clearHighlights();
+    const nodesVisited: any[] = [];
+    let current = node;
+
+    while (current) {
+      nodesVisited.push(current);
+      if (!current.children || current.children.length === 0) break;
+
+      const condition = this.parseCondition(current.data.name);
+      if (!condition) {
+        this.showMessage("No se pudo interpretar: " + current.data.name);
+        return;
+      }
+
+      const userVal = values[condition.attr];
+      if (userVal === undefined) {
+        this.showMessage("Falta atributo: " + condition.attr);
+        return;
+      }
+
+      let decision = false;
+      switch (condition.op) {
+        case '>': decision = userVal > condition.value; break;
+        case '<': decision = userVal < condition.value; break;
+        case '==': decision = userVal == condition.value; break;
+        case '!=': decision = userVal != condition.value; break;
+        default:
+          this.showMessage("Operador no soportado: " + condition.op);
+          return;
+      }
+
+      current = decision ? current.children[0] : current.children[1];
+    }
+
+    nodesVisited.forEach((n: any) => {
+      this.g.selectAll('g.node')
+        .filter((d: any) => d.data.id === n.data.id)
+        .classed('highlighted', true);
+      if (n.parent) {
+        this.g.selectAll('path.link')
+          .filter((l: any) => l.source.data.id === n.parent.data.id && l.target.data.id === n.data.id)
+          .classed('highlighted', true);
+      }
+    });
+
+    if (current) this.showMessage("Clasificación: " + current.data.name);
+  }
+
+  runSimulation(input: string) {
+    if (!input) return;
+    const pairs = input.split(',').map(p => p.trim().split('='));
+    const values: { [key: string]: any } = {};
+    for (const [k, v] of pairs) {
+      values[k.trim()] = isNaN(Number(v.trim())) ? v.trim() : Number(v.trim());
+    }
+
+    const syncedRoot = d3.hierarchy(this.treeData);
+    this.simulateClassification(syncedRoot, values);
   }
 }

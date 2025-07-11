@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DiagramaComponent } from './diagrama.component';
+import { DiagramaArbolComponent } from './diagrama.component';
 
-describe('DiagramaComponent', () => {
-  let component: DiagramaComponent;
-  let fixture: ComponentFixture<DiagramaComponent>;
+describe('DiagramaArbolComponent', () => {
+  let component: DiagramaArbolComponent;
+  let fixture: ComponentFixture<DiagramaArbolComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DiagramaComponent]
+      imports: [DiagramaArbolComponent]  // Componente standalone se importa así
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DiagramaComponent);
+    fixture = TestBed.createComponent(DiagramaArbolComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -21,3 +21,4 @@ describe('DiagramaComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -57,6 +57,26 @@
         </button>
       </div>
     </div>
+
+    <!-- Nueva sección dentro del panel de control para Simulación -->
+    <div class="control-section">
+      <h4>Simulación de Clasificación</h4>
+      <input
+        type="text"
+        placeholder="Ejemplo: Temperatura=30, Humedad=alta"
+        [(ngModel)]="simulationInput"
+        class="simulation-input"
+        (keyup.enter)="runSimulation(simulationInput)">
+      <button 
+        class="control-btn decision-btn"
+        (click)="runSimulation(simulationInput)"
+        [disabled]="!simulationInput || simulationInput.trim() === ''">
+        ▶️ Ejecutar Simulación
+      </button>
+    </div>
+
+    <!-- Mensaje de Simulación ubicado justo aquí -->
+    <div #messageBox class="simulation-message"></div>
   </div>
 
   <!-- Editor de Texto -->
@@ -87,7 +107,12 @@
         <p><strong>ID:</strong> {{ selectedNode.id }}</p>
         <p><strong>Nombre:</strong> {{ selectedNode.name }}</p>
         <p><strong>Tipo:</strong> 
-          <span [class]="'type-badge ' + selectedNode.type">
+          <span [ngClass]="{
+            'type-badge': true,
+            'root': selectedNode.type === 'root',
+            'decision': selectedNode.type === 'decision',
+            'leaf': selectedNode.type === 'leaf'
+          }">
             {{ selectedNode.type === 'root' ? 'Raíz' : 
                selectedNode.type === 'decision' ? 'Decisión' : 'Hoja' }}
           </span>
