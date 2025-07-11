@@ -187,4 +187,72 @@
   .concept-icon {
     font-size: 2.5rem;
   }
+  .didactic-section {
+  background: #e3f2fd;
+  padding: 1.2em 1em;
+  border-radius: 8px;
+  margin-top: 2em;
+  box-shadow: 0 2px 8px #0001;
+  }
+  .didactic-section h3 {
+  margin-top: 0;
+  color: #1565c0;
+  }
+  .didactic-section ul {
+  margin: 0.5em 0 0.5em 1.2em;
+  }
+}
+.card-grid {
+  display: grid;
+  gap: 1.5em;
+}
+
+.card-horizontal {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0001;
+  padding: 1.2em;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card-horizontal:hover {
+  box-shadow: 0 6px 24px #0002;
+  transform: translateY(-4px) scale(1.01);
+}
+
+.card-icon {
+  margin-right: 1em;
+  color: #1976d2;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.2em;
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.card-description {
+  margin: 0.3em 0 0 0;
+  color: #4a5568;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .card-horizontal {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em;
+  }
+  .card-icon {
+    margin-bottom: 0.5em;
+    margin-right: 0;
+  }
 }
