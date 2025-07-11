@@ -112,4 +112,4 @@ Una vez cargado, abre tu navegador y visita:
 
 
 ## Referencias
-[Web_Assembly]([http://localhost:4200](https://dev.to/railsstudent/angular-on-steroids-elevating-performance-with-webassembly-43gb))
+[Web_Assembly](https://dev.to/railsstudent/angular-on-steroids-elevating-performance-with-webassembly-43gb)
