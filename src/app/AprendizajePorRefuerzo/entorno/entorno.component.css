@@ -281,7 +281,7 @@
 }
 
 .legend-goal {
-  background: var(--success-color);
+  background: green;
 }
 
 .legend-wall {
@@ -289,7 +289,7 @@
 }
 
 .legend-path {
-  background: #f56565;
+  background: #ec7643;
 }
 
 .canvas-container {
