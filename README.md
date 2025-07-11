@@ -52,7 +52,7 @@ brew install git
 Abre una terminal o consola y ejecuta:
 
 ```bash
-git clone [<URL-del-repositorio>](https://github.com/camilo09m/Machine-Learning)
+git clone https://github.com/camilo09m/Machine-Learning
 ```
 
 ---
@@ -60,7 +60,7 @@ git clone [<URL-del-repositorio>](https://github.com/camilo09m/Machine-Learning)
 ###  4. Dirigirse a la carpeta del proyecto
 
 ```bash
-cd <nombre-de-la-carpeta>
+cd Machine-Learning
 ```
 
 
