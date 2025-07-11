@@ -1,6 +1,6 @@
-## 🚀 Guía para clonar y ejecutar el proyecto (Windows / Linux / macOS)
+##  Guía para clonar y ejecutar el proyecto (Windows / Linux / macOS)
 
-### 🔧 Requisitos previos
+###  Requisitos previos
 
 Antes de comenzar, asegúrate de tener instalados:
 
@@ -10,7 +10,7 @@ Antes de comenzar, asegúrate de tener instalados:
 
 ---
 
-### ✅ 1. Instalar Node.js
+###  1. Instalar Node.js
 
 #### Windows:
 
@@ -34,7 +34,7 @@ brew install node
 
 ---
 
-### ✅ 2. Instalar Git
+###  2. Instalar Git
 
 #### Windows:
 
@@ -56,7 +56,7 @@ brew install git
 
 ---
 
-### ✅ 3. Clonar el repositorio
+###  3. Clonar el repositorio
 
 Abre una terminal o consola y ejecuta:
 
@@ -68,7 +68,7 @@ Reemplaza `<URL-del-repositorio>` por la URL real del repositorio.
 
 ---
 
-### ✅ 4. Dirigirse a la carpeta del proyecto
+###  4. Dirigirse a la carpeta del proyecto
 
 ```bash
 cd <nombre-de-la-carpeta>
@@ -78,7 +78,7 @@ Reemplaza `<nombre-de-la-carpeta>` con el nombre del directorio del proyecto.
 
 ---
 
-### ✅ 5. Abrir la terminal en la carpeta del proyecto
+###  5. Abrir la terminal en la carpeta del proyecto
 
 * Windows:
   Haz clic derecho dentro de la carpeta y selecciona:
@@ -90,7 +90,7 @@ Reemplaza `<nombre-de-la-carpeta>` con el nombre del directorio del proyecto.
 
 ---
 
-### ✅ 6. Instalar dependencias del proyecto
+###  6. Instalar dependencias del proyecto
 
 Dentro de la terminal ubicada en la carpeta del proyecto, ejecuta:
 
@@ -100,7 +100,7 @@ npm install
 
 ---
 
-### ✅ 7. Instalar Angular CLI globalmente (solo la primera vez)
+###  7. Instalar Angular CLI globalmente (solo la primera vez)
 
 Para poder usar el comando `ng`, instala Angular CLI globalmente:
 
@@ -110,7 +110,7 @@ npm install -g @angular/cli
 
 ---
 
-### ✅ 8. Ejecutar el servidor de desarrollo
+###  8. Ejecutar el servidor de desarrollo
 
 Inicia el proyecto con:
 
