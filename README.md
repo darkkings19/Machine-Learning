@@ -115,7 +115,7 @@ Una vez cargado, abre tu navegador y visita:
 1. [Web Assembly](https://dev.to/railsstudent/angular-on-steroids-elevating-performance-with-webassembly-43gb)
 2. [Machine Learning](https://www.sap.com/latinamerica/products/artificial-intelligence/what-is-machine-learning.html)
 3. [Machine Learning: Mitchell, T. M. (1997). Machine learning. McGraw-Hill.]
-4. [Aborl de Decisiones](https://scielo.pt/scielo.php?pid=S1646-98952023000300084&script=sci_arttext&tlng=es)
-5. [Aborl de Decisiones: Gómez, C. A. R. (2020). Aplicación del Machine Learning en agricultura de precisión. Revista Cintex, 25(2), 14-27.]
-6. [Aprndizaje por Refuerzo](https://www.ibm.com/es-es/think/topics/reinforcement-learning)
+4. [Arbol de Decisiones](https://scielo.pt/scielo.php?pid=S1646-98952023000300084&script=sci_arttext&tlng=es)
+5. [Arbol de Decisiones: Gómez, C. A. R. (2020). Aplicación del Machine Learning en agricultura de precisión. Revista Cintex, 25(2), 14-27.]
+6. [Aprendizaje por Refuerzo](https://www.ibm.com/es-es/think/topics/reinforcement-learning)
 7. [Aprendizaje por Refuerzo: Errecalde, M. L. (2001). Marcos teóricos del aprendizaje por refuerzo multiagente. In III Workshop de Investigadores en Ciencias de la Computación.]
