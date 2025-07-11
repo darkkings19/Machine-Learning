@@ -52,16 +52,7 @@ print(Q)
   <div style="flex: 1; min-width: 320px;">
     <label style="font-weight: bold;">¿Qué hace este código?</label>
     <div style="background: #fffde7; padding: 1.2em 1em; border-radius: 8px; font-size: 1.05em; color: #444; box-shadow: 0 2px 8px #0001;">
-      Este código implementa <b>Q-learning</b>, un algoritmo de aprendizaje por refuerzo, en un entorno muy simple con 4 estados y 2 acciones posibles (izquierda o derecha).
-      <ul>
-        <li>El agente siempre empieza en el estado 0 y su objetivo es llegar al estado 3, donde recibe una recompensa.</li>
-        <li>La matriz Q almacena el valor aprendido de tomar cada acción en cada estado.</li>
-        <li>En cada episodio, el agente explora o explota usando la estrategia <b>ε-greedy</b> (a veces elige al azar, a veces elige la mejor acción conocida).</li>
-        <li>La matriz Q se actualiza en cada paso usando la fórmula de Q-learning, que combina la recompensa inmediata y el valor futuro esperado.</li>
-        <li>Al final, se imprime la Q-table aprendida, que indica cuál es la mejor acción en cada estado.</li>
-      </ul>
-      <b>¿Por qué es importante?</b><br>
-      Q-learning es la base de muchos algoritmos modernos de inteligencia artificial que aprenden a tomar decisiones secuenciales, como robots, videojuegos y sistemas de recomendación.
+      Este código implementa Q-learning para que un agente aprenda a llegar al estado 3 en un entorno con 4 estados (0 a 3). En cada estado, puede moverse a la izquierda (acción 0) o a la derecha (acción 1). Solo obtener el estado 3 da recompensa (1), los demás 0. El agente elige acciones con una mezcla de exploración y explotación (ε-greedy). Luego actualiza la matriz Q, que guarda el valor esperado de cada acción en cada estado, usando la recompensa recibida y la mejor recompensa futura estimada. Esto se repite por 100 episodios empezando siempre en el estado 0. Al final, la matriz Q muestra qué acción es mejor en cada estado para maximizar la recompensa. Así el agente “aprende” a tomar decisiones óptimas en este entorno simple.
     </div>
   </div>
 </div>
