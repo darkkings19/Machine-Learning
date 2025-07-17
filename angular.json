@@ -27,7 +27,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/components/decision-tree/dt-diagram/dt-diagram.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
